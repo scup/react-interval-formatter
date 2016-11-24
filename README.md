@@ -1,8 +1,8 @@
 # react-interval-formatter
 
-A React formatter that formatter the element again each 15 seconds
+A React formatter that updates the element each 15 seconds
 
-## [Demo](http://sanniassin.github.io/react-input-mask/demo.html)
+## [Demo](http://scup.github.io/react-interval-formatter/demo.html)
 
 ## Install
 ```
@@ -47,12 +47,6 @@ export default () =>
 ```
 
 It will render<br/>
-<code>0 seconds</code>: `<label class="ten-multiplier">10 * 1 = 10</div>`<br/>
-<code>15 seconds</code>: `<label class="ten-multiplier">10 * 2 = 20</div>`<br/>
-<code>30 seconds</code>: `<label class="ten-multiplier">10 * 3 = 30</div>`
-
-## Known issues
-Screen keyboard backspace may not work in Android 4.x browser due to broken input events.
-
-## Thanks
-Thanks to [BrowserStack](https://www.browserstack.com/) for help with testing on real devices
+<code>Instantly</code>: `<label class="ten-multiplier">10 * 1 = 10</div>`<br/>
+<code>15 seconds later</code>: `<label class="ten-multiplier">10 * 2 = 20</div>`<br/>
+<code>30 seconds later</code>: `<label class="ten-multiplier">10 * 3 = 30</div>`

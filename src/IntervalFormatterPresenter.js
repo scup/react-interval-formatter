@@ -1,22 +1,22 @@
 import React, { PropTypes } from 'react'
 import omit from 'lodash.omit'
 
-const RealtimeFormatterPresenter = (props) => {
+const IntervalFormatterPresenter = (props) => {
   const { tag, value } = props
-  const otherProps = omit(props, Object.keys(RealtimeFormatterPresenter.propTypes))
+  const otherProps = omit(props, Object.keys(IntervalFormatterPresenter.propTypes))
 
   return React.createElement(tag, Object.assign(otherProps, {
     children: value
   }))
 }
 
-RealtimeFormatterPresenter.propTypes = {
+IntervalFormatterPresenter.propTypes = {
   tag: PropTypes.string,
   value: PropTypes.node
 }
 
-RealtimeFormatterPresenter.defaultProps = {
+IntervalFormatterPresenter.defaultProps = {
   tag: 'span'
 }
 
-export default RealtimeFormatterPresenter
+export default IntervalFormatterPresenter

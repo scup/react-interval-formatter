@@ -2,7 +2,7 @@
   "name": "realtime-formatter",
   "version": "0.0.1",
   "description": "Update a value in realtime",
-  "main": "lib/RealtimeFormatter.js",
+  "main": "lib/IntervalFormatter.js",
   "repository": {
     "url": "scup/realtime-formatter",
     "type": "git"

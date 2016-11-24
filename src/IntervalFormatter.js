@@ -1,59 +1,46 @@
-const dependencies = { window }
+import React, { Component, PropTypes } from 'react'
 
-class FormatterCache {
-  constructor ({ value, formatter, callback }) {
-    Object.assign(this, {
-      value,
+import IntervalFormatterPresenter from './IntervalFormatterPresenter'
+import FormatterEmitter from './FormatterEmitter'
+
+class IntervalFormatter extends Component {
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      formattedValue: null
+    }
+
+    this.updateFormattedValue = this.updateFormattedValue.bind(this)
+  }
+
+  updateFormattedValue (formattedValue) {
+    this.setState({ formattedValue })
+  }
+
+  componentDidMount () {
+    const { formatter, value } = this.props
+
+    this.unsubscriber = FormatterEmitter.register({
+      callback: this.updateFormattedValue,
       formatter,
-      callback
+      value
     })
-
-    this.formatValue = this.formatValue.bind(this)
-    this.formatValue()
   }
 
-  formatValue () {
-    const formattedValue = this.formatter(this.value)
+  componentWillUnmount () {
+    this.unsubscriber()
+  }
 
-    if (this.formattedValue !== formattedValue) {
-      Object.assign(this, { formattedValue })
-      this.callback(formattedValue)
-    }
+  render () {
+    const { formattedValue } = this.state
+    return <IntervalFormatterPresenter value={formattedValue} />
   }
 }
 
-class IntervalFormatter {
-  constructor () {
-    this.subscriptions = new Set()
-    this.interval = null
-
-    this.formatSubscriptions = this.formatSubscriptions.bind(this)
-    this.register = this.register.bind(this)
-  }
-
-  formatSubscriptions () {
-    this.subscriptions.forEach(formatter => formatter.formatValue())
-  }
-
-  register ({ value, formatter, callback }, injection) {
-    const { window } = Object.assign({}, dependencies, injection)
-
-    const formatterCache = new FormatterCache({ value, formatter, callback })
-    this.subscriptions.add(formatterCache)
-
-    if (this.interval === null) {
-      this.interval = window.setInterval(this.formatSubscriptions, 15000)
-    }
-
-    return () => {
-      this.subscriptions.delete(formatterCache)
-
-      if (this.subscriptions.size === 0) {
-        window.clearInterval(this.interval)
-        this.interval = null
-      }
-    }
-  }
+IntervalFormatter.propTypes = {
+  formatter: PropTypes.func,
+  value: PropTypes.any
 }
 
-export default new IntervalFormatter()
+export default IntervalFormatter

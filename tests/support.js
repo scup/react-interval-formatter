@@ -1,29 +1,23 @@
-const chai = require('chai')
-const chaiEnzyme = require('chai-enzyme')
-const jsdom = require('jsdom')
+import jsdom from 'jsdom'
 
-chai.use(chaiEnzyme())
-
-// ============================================================================
-// Mocking DOM
-// ============================================================================
-const doc = jsdom.jsdom(`
+global.document = jsdom.jsdom(`
     <!doctype html>
     <html>
         <body></body>
     </html>
 `)
 
-const win = doc.defaultView
+global.window = document.defaultView
+global.navigator = {
+  userAgent: 'node.js'
+}
 
-Object.assign(global, {
-  document: doc,
-  window: win,
-  Element: win.Element
-})
-
-Object.keys(window).forEach((key) => {
-  if (!(key in global)) {
-    global[key] = window[key]
+Object.keys(document.defaultView).forEach((property) => {
+  if (typeof global[property] === 'undefined') {
+    global[property] = document.defaultView[property]
   }
 })
+
+const chai = require('chai')
+const chaiEnzyme = require('chai-enzyme')
+chai.use(chaiEnzyme())

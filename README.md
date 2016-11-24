@@ -32,7 +32,7 @@ You can send any props you want, i.e.: `onClick`, `className`, etc...
 ```js
 import IntervalFormatter from 'react-interval-formatter'
 
-const multiplier = 1
+let multiplier = 1
 const formatter = (value) =>
   `${value} * ${multiplier} = ${value * multiplier++}`
 
@@ -40,7 +40,7 @@ export default () =>
   <IntervalFormatter
     tag='label'
     formatter={formatter}
-    value=10
+    value={10}
     className='ten-multiplier'
     onClick={() => alert('aaa')}
   />;

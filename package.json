@@ -1,6 +1,6 @@
 {
   "name": "react-interval-formatter",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Update a value in realtime",
   "main": "lib/IntervalFormatter.js",
   "repository": {
@@ -48,6 +48,7 @@
     ]
   },
   "dependencies": {
+    "lodash.omit": "^4.5.0",
     "react": "^15.4.1"
   },
   "devDependencies": {
@@ -60,7 +61,6 @@
     "cheerio": "^0.22.0",
     "enzyme": "^2.6.0",
     "jsdom": "^9.8.3",
-    "lodash.omit": "^4.5.0",
     "mocha": "^3.1.2",
     "nyc": "^10.0.0",
     "react-addons-test-utils": "^15.4.1",

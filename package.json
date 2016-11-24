@@ -1,10 +1,10 @@
 {
-  "name": "realtime-formatter",
+  "name": "react-interval-formatter",
   "version": "0.0.1",
   "description": "Update a value in realtime",
   "main": "lib/IntervalFormatter.js",
   "repository": {
-    "url": "scup/realtime-formatter",
+    "url": "scup/react-interval-formatter",
     "type": "git"
   },
   "author": "Alberto Silva <alberto.silva@sprinklr.com>",

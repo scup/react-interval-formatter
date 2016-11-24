@@ -44,4 +44,26 @@ describe('IntervalFormatter', () => {
     sinon.assert.calledOnce(unsubscriber)
     FormatterEmitter.register.restore()
   })
+
+  it('renders other props', () => {
+    const formatter = sinon.stub()
+      .withArgs('the value')
+      .returns('the formatted value')
+
+    const callback = sinon.spy()
+
+    const wrapper = mount(
+      <IntervalFormatter
+        tag='div'
+        value='the value'
+        onClick={callback}
+        className='className'
+        formatter={formatter} />
+    )
+
+    wrapper.simulate('click')
+    expect(callback.calledOnce).to.be.true
+
+    expect(wrapper).to.have.html('<div data-reactroot="" class="className">the formatted value</div>')
+  })
 })

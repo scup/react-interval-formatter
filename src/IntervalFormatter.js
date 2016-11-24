@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import omit from 'lodash.omit'
 
 import IntervalFormatterPresenter from './IntervalFormatterPresenter'
 import FormatterEmitter from './FormatterEmitter'
@@ -34,7 +35,9 @@ class IntervalFormatter extends Component {
 
   render () {
     const { formattedValue } = this.state
-    return <IntervalFormatterPresenter value={formattedValue} />
+    const otherProps = omit(this.props, Object.keys(IntervalFormatter.propTypes))
+
+    return <IntervalFormatterPresenter value={formattedValue} {...otherProps} />
   }
 }
 

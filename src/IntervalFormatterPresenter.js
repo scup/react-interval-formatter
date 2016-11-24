@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 import omit from 'lodash.omit'
 
 const IntervalFormatterPresenter = (props) => {
@@ -11,8 +11,8 @@ const IntervalFormatterPresenter = (props) => {
 }
 
 IntervalFormatterPresenter.propTypes = {
-  tag: PropTypes.string,
-  value: PropTypes.node
+  tag: React.PropTypes.string,
+  value: React.PropTypes.node
 }
 
 IntervalFormatterPresenter.defaultProps = {

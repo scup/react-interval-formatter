@@ -66,4 +66,29 @@ describe('IntervalFormatter', () => {
 
     expect(wrapper).to.have.html('<div data-reactroot="" class="className">the formatted value</div>')
   })
+
+  it('unsubscribes and register new subscriber on update', () => {
+    const formatter = sinon.stub()
+      .withArgs('value2')
+      .returns('formatted2')
+    const unsubscriber = sinon.spy()
+
+    const registerStub = sinon.stub(FormatterEmitter, 'register')
+    registerStub
+      .withArgs({
+        value: 'value',
+        formatter,
+        callback: sinon.match.func
+      })
+      .returns(unsubscriber)
+
+    const wrapper = mount(<IntervalFormatter value='value' formatter={formatter} />)
+    wrapper.setProps({
+      value: 'newValue'
+    })
+
+    expect(wrapper).to.have.state('formattedValue', 'formatted2')
+    sinon.assert.calledOnce(unsubscriber)
+    FormatterEmitter.register.restore()
+  })
 })

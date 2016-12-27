@@ -20,13 +20,15 @@ class IntervalFormatter extends Component {
   }
 
   componentDidMount () {
-    const { formatter, value } = this.props
+    this.subscribe(this.props)
+  }
 
-    this.unsubscriber = FormatterEmitter.register({
-      callback: this.updateFormattedValue,
-      formatter,
-      value
-    })
+  componentWillReceiveProps (nextProps) {
+    const { formatter, value } = nextProps
+    this.unsubscriber && this.unsubscriber()
+
+    this.subscribe(nextProps)
+    this.updateFormattedValue(formatter(value))
   }
 
   componentWillUnmount () {
@@ -38,6 +40,18 @@ class IntervalFormatter extends Component {
     const otherProps = omit(this.props, Object.keys(IntervalFormatter.propTypes))
 
     return <IntervalFormatterPresenter value={formattedValue} {...otherProps} />
+  }
+
+  subscribe (props) {
+    if (!this.unsubscriber) {
+      const { formatter, value } = props
+
+      this.unsubscriber = FormatterEmitter.register({
+        callback: this.updateFormattedValue,
+        formatter,
+        value
+      })
+    }
   }
 }
 

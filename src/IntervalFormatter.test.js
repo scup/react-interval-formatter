@@ -83,9 +83,13 @@ describe('IntervalFormatter', () => {
       .returns(unsubscriber)
 
     const wrapper = mount(<IntervalFormatter value='value' formatter={formatter} />)
+    const oldSubscriber = wrapper.getNode().unsubscriber
     wrapper.setProps({
       value: 'newValue'
     })
+    const newSubscriber = wrapper.getNode().unsubscriber
+
+    expect(oldSubscriber).to.not.equal(newSubscriber)
 
     expect(wrapper).to.have.state('formattedValue', 'formatted2')
     sinon.assert.calledOnce(unsubscriber)

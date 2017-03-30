@@ -25,14 +25,14 @@ class IntervalFormatter extends Component {
 
   componentWillReceiveProps (nextProps) {
     const { formatter, value } = nextProps
-    this.unsubscriber && this.unsubscriber()
+    this.unsubscribe()
 
     this.subscribe(nextProps)
     this.updateFormattedValue(formatter(value))
   }
 
   componentWillUnmount () {
-    this.unsubscriber()
+    this.unsubscribe()
   }
 
   render () {
@@ -52,6 +52,11 @@ class IntervalFormatter extends Component {
         value
       })
     }
+  }
+
+  unsubscribe () {
+    this.unsubscriber && this.unsubscriber()
+    this.unsubscriber = null
   }
 }
 

@@ -1,6 +1,6 @@
 {
   "name": "react-interval-formatter",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Update a value in realtime",
   "main": "lib/IntervalFormatter.js",
   "repository": {

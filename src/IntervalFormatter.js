@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import omit from 'lodash.omit'
 
 import IntervalFormatterPresenter from './IntervalFormatterPresenter'
@@ -61,8 +61,8 @@ class IntervalFormatter extends Component {
 }
 
 IntervalFormatter.propTypes = {
-  formatter: React.PropTypes.func,
-  value: React.PropTypes.any
+  formatter: PropTypes.func,
+  value: PropTypes.any
 }
 
 export default IntervalFormatter
